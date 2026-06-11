@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jackye Silva | UGC Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg:#c4c2bd;
+    --wine:#550000;
+    --wine-light:#7a1a1a;
+    --cream:#f5f3ef;
+    --text:#2a1a1a;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:20px 48px;
+    display:flex;justify-content:space-between;align-items:center;
+    background:transparent;
+    transition:background .4s;
+  }
+  nav.scrolled{background:rgba(196,194,189,0.95);backdrop-filter:blur(8px);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:.2em;color:var(--wine);text-decoration:none;font-weight:400;}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{color:var(--wine);text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+
+  /* HERO */
+  #hero{
+    min-height:100vh;
+    display:grid;grid-template-columns:1fr 1fr;
+    align-items:center;
+    padding:100px 48px 60px;
+    gap:40px;
+  }
+  .hero-text{display:flex;flex-direction:column;justify-content:center;}
+  .hero-label{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--wine);opacity:.7;margin-bottom:20px;}
+  .hero-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(3.5rem,7vw,6rem);
+    font-weight:300;
+    line-height:1.05;
+    color:var(--wine);
+    letter-spacing:.02em;
+  }
+  .hero-name em{font-style:italic;font-weight:300;}
+  .hero-tagline{
+    margin-top:24px;
+    font-size:1rem;
+    line-height:1.7;
+    color:var(--wine);
+    opacity:.75;
+    max-width:380px;
+    font-weight:300;
+  }
+  .hero-cta{
+    margin-top:40px;
+    display:inline-block;
+    padding:14px 36px;
+    border:1px solid var(--wine);
+    color:var(--wine);
+    text-decoration:none;
+    font-size:.8rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    transition:all .3s;
+  }
+  .hero-cta:hover{background:var(--wine);color:var(--cream);}
+  .hero-img-wrap{position:relative;display:flex;justify-content:center;}
+  .hero-img-wrap img{
+    width:100%;
+    max-width:440px;
+    height:600px;
+    object-fit:cover;
+    object-position:center top;
+    filter:brightness(.97);
+  }
+
+  /* SECTIONS COMMON */
+  section{padding:90px 48px;}
+  .section-label{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--wine);opacity:.6;margin-bottom:12px;}
+  .section-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,4vw,3rem);
+    font-weight:300;
+    color:var(--wine);
+    line-height:1.2;
+    margin-bottom:32px;
+  }
+  .divider{width:48px;height:1px;background:var(--wine);opacity:.4;margin:0 auto 48px;}
+
+  /* SOBRE */
+  #sobre{background:var(--cream);}
+  .sobre-inner{max-width:800px;margin:0 auto;text-align:center;}
+  .sobre-inner p{font-size:1.05rem;line-height:1.85;color:var(--text);opacity:.85;margin-bottom:20px;}
+
+  /* NICHOS */
+  #nichos{background:var(--bg);}
+  .nichos-inner{max-width:900px;margin:0 auto;text-align:center;}
+  .nichos-grid{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:8px;
+  }
+  .nicho-tag{
+    padding:10px 28px;
+    border:1px solid rgba(85,0,0,.3);
+    font-size:.82rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--wine);
+    transition:all .3s;
+    cursor:default;
+  }
+  .nicho-tag:hover{background:var(--wine);color:var(--cream);}
+
+  /* FOTOS PLACEHOLDER */
+  #fotos{background:var(--cream);}
+  .fotos-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    max-width:960px;margin:0 auto;
+  }
+  .foto-item{aspect-ratio:4/5;overflow:hidden;}
+  .foto-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+  .foto-item:hover img{transform:scale(1.04);}
+
+  /* VIDEOS */
+  #videos{background:var(--bg);}
+  .videos-inner{max-width:960px;margin:0 auto;}
+  .videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:8px;}
+  .video-wrap{aspect-ratio:9/16;}
+  .video-wrap{
+    position:relative;width:100%;overflow:hidden;
+    background:#1a0a0a;
+  }
+  .video-wrap iframe{width:100%;height:100%;border:none;aspect-ratio:9/16;display:block;}
+  .video-caption{margin-top:10px;font-size:.78rem;letter-spacing:.08em;color:var(--wine);opacity:.7;}
+
+  /* PROCESSO */
+  #processo{background:var(--cream);}
+  .processo-inner{max-width:900px;margin:0 auto;}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:8px;justify-items:center;}
+  @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.steps{grid-template-columns:1fr;}}
+  .step{text-align:center;}
+  .step-num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3rem;font-weight:300;
+    color:var(--wine);opacity:.25;
+    line-height:1;margin-bottom:12px;
+  }
+  .step h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--wine);margin-bottom:10px;}
+  .step p{font-size:.85rem;line-height:1.7;color:var(--text);opacity:.75;}
+
+  /* MARCAS */
+  #marcas{background:var(--bg);}
+  .marcas-inner{max-width:900px;margin:0 auto;text-align:center;}
+  .carousel-wrap{overflow:hidden;position:relative;margin-top:8px;}
+  .carousel-track{
+    display:flex;gap:0;
+    animation:slide 18s linear infinite;
+    width:max-content;
+  }
+  .carousel-track:hover{animation-play-state:paused;}
+  .marca-item{
+    min-width:180px;height:80px;
+    display:flex;align-items:center;justify-content:center;
+    padding:0 32px;
+    transition:opacity .3s;
+    border-right:1px solid rgba(85,0,0,.12);
+  }
+  .marca-item img{max-height:52px;max-width:140px;width:auto;object-fit:contain;opacity:.75;filter:grayscale(30%);transition:opacity .3s,filter .3s;}
+  .marca-item:hover img{opacity:1;filter:grayscale(0%);}
+  @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* FAQ */
+  #faq{background:var(--cream);}
+  .faq-inner{max-width:720px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(85,0,0,.15);padding:24px 0;}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;
+    cursor:pointer;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.15rem;font-weight:400;color:var(--wine);
+  }
+  .faq-icon{font-size:1.2rem;color:var(--wine);opacity:.5;transition:transform .3s;user-select:none;}
+  .faq-a{
+    max-height:0;overflow:hidden;
+    font-size:.9rem;line-height:1.75;color:var(--text);opacity:.75;
+    transition:max-height .4s ease,padding .3s;
+  }
+  .faq-item.open .faq-a{max-height:200px;padding-top:16px;}
+  .faq-item.open .faq-icon{transform:rotate(45deg);}
+
+  /* CONTATO */
+  #contato{background:var(--wine);text-align:center;padding:80px 48px;}
+  #contato .section-label{color:var(--cream);opacity:.6;}
+  #contato .section-title{color:var(--cream);}
+  #contato p{color:var(--cream);opacity:.75;font-size:.95rem;margin-bottom:36px;}
+  .btn-contato{
+    display:inline-block;padding:16px 48px;
+    background:transparent;border:1px solid var(--cream);
+    color:var(--cream);text-decoration:none;
+    font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;
+    transition:all .3s;
+  }
+  .btn-contato:hover{background:var(--cream);color:var(--wine);}
+
+  /* FOOTER */
+  footer{background:#3a0000;padding:28px 48px;text-align:center;}
+  footer p{color:var(--cream);opacity:.4;font-size:.75rem;letter-spacing:.1em;}
+
+  /* WHATSAPP */
+  .wa-btn{
+    position:fixed;bottom:32px;right:32px;z-index:200;
+    width:56px;height:56px;border-radius:50%;
+    background:#25d366;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.2);
+    transition:transform .2s,box-shadow .2s;
+    text-decoration:none;
+  }
+  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(0,0,0,.3);}
+  .wa-btn svg{width:28px;height:28px;fill:#fff;}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    nav{padding:18px 24px;}
+    .nav-links{display:none;}
+    #hero{grid-template-columns:1fr;padding:90px 24px 48px;text-align:center;}
+    .hero-img-wrap{order:-1;}
+    .hero-img-wrap img{height:420px;max-width:100%;}
+    .hero-tagline{margin:20px auto 0;}
+    section{padding:64px 24px;}
+    .fotos-grid{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">Jackye Silva</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#nichos">Nichos</a></li>
+    <li><a href="#videos">Vídeos</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#marcas">Marcas</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-label">UGC Creator · Estrategista de Conteúdo</span>
+    <h1 class="hero-name">Jackye<br><em>Silva</em></h1>
+    <p class="hero-tagline">Conteúdo que conecta marcas à sua comunidade — com autenticidade, estética e estratégia.</p>
+    <a href="#contato" class="hero-cta">Vamos trabalhar juntos</a>
+  </div>
+  <div class="hero-img-wrap">
+    <img src="data:image/jpeg;base64,PHOTO_PLACEHOLDER" alt="Jackye Silva" id="heroImg"/>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-inner">
+    <p class="section-label">Sobre mim</p>
+    <h2 class="section-title">Criadora de conteúdo<br><em>com olhar estratégico</em></h2>
+    <div class="divider"></div>
+    <p>Sou Jackye Silva — UGC Creator e estrategista de conteúdo com background em jornalismo e marketing. Produzo conteúdo autêntico para marcas que querem se comunicar de forma real, estética e com resultado.</p>
+    <p>Minha entrega vai além do vídeo: trago direção criativa, roteiro, edição e uma narrativa que faz a marca ser sentida — não apenas vista. Atendo marcas nacionais e internacionais nos segmentos de beleza, saúde, lifestyle, moda, aviação e muito mais.</p>
+  </div>
+</section>
+
+<!-- NICHOS -->
+<section id="nichos">
+  <div class="nichos-inner">
+    <p class="section-label">Especialidades</p>
+    <h2 class="section-title">Nichos atendidos</h2>
+    <div class="divider"></div>
+    <div class="nichos-grid">
+      <span class="nicho-tag">Beleza & Skincare</span>
+      <span class="nicho-tag">Saúde & Bem-estar</span>
+      <span class="nicho-tag">Moda & Lifestyle</span>
+      <span class="nicho-tag">Casa & Decoração</span>
+      <span class="nicho-tag">Alimentação</span>
+      <span class="nicho-tag">Turismo</span>
+      <span class="nicho-tag">Aviação</span>
+      <span class="nicho-tag">Estética</span>
+      <span class="nicho-tag">Tecnologia</span>
+      <span class="nicho-tag">Finanças</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOTOS -->
+<section id="fotos">
+  <div style="max-width:960px;margin:0 auto;text-align:center;">
+    <p class="section-label">Portfólio</p>
+    <h2 class="section-title">Fotos produzidas</h2>
+    <div class="divider"></div>
+    <div class="fotos-grid">
+      <div class="foto-item"><img src="https://i.postimg.cc/0MrrmXx7/Whats-App-Image-2026-05-29-at-10-45-07.jpg" alt="Portfolio 1"/></div>
+      <div class="foto-item"><img src="https://i.postimg.cc/34WWpf70/Whats-App-Image-2026-05-29-at-10-45-07-(1).jpg" alt="Portfolio 2"/></div>
+      <div class="foto-item"><img src="https://i.postimg.cc/2q0V1Npw/Whats-App-Image-2026-05-29-at-10-45-07-(2).jpg" alt="Portfolio 3"/></div>
+      <div class="foto-item"><img src="https://i.postimg.cc/cg66YkZw/Whats-App-Image-2026-05-29-at-10-45-07-(3).jpg" alt="Portfolio 4"/></div>
+      <div class="foto-item"><img src="https://i.postimg.cc/p9spmMNJ/Whats-App-Image-2026-06-10-at-14-48-17.jpg" alt="Portfolio 5"/></div>
+      <div class="foto-item"><img src="https://i.postimg.cc/xk6cXVry/Whats-App-Image-2026-06-10-at-14-48-17-(1).jpg" alt="Portfolio 6"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="videos-inner">
+    <p class="section-label">Portfólio em vídeo</p>
+    <h2 class="section-title">Conteúdos criados</h2>
+    <div class="divider"></div>
+    <div class="videos-grid">
+    <div class="videos-grid">
+      <div><div class="video-wrap" style="padding-bottom:177.78%">
+        <iframe src="https://player.vimeo.com/video/1200189286?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div></div>
+      <div><div class="video-wrap" style="padding-bottom:177.78%">
+        <iframe src="https://player.vimeo.com/video/1200188482?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div></div>
+      <div><div class="video-wrap" style="padding-bottom:177.78%">
+        <iframe src="https://player.vimeo.com/video/1200188484?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div></div>
+      <div><div class="video-wrap" style="padding-bottom:177.78%">
+        <iframe src="https://player.vimeo.com/video/1200188410?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div></div>
+      <div><div class="video-wrap" style="padding-bottom:75%">
+        <iframe src="https://player.vimeo.com/video/1200203791?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="processo-inner">
+    <p class="section-label" style="text-align:center;">Como funciona</p>
+    <h2 class="section-title" style="text-align:center;">Processo criativo</h2>
+    <div class="divider"></div>
+    <div class="steps" style="justify-items:center;text-align:center;">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Briefing</h3>
+        <p>Entendo a marca, o público, o objetivo da campanha e o tom de voz desejado.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Roteiro</h3>
+        <p>Desenvolvo o conceito criativo e o roteiro do conteúdo com foco em conversão.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Produção</h3>
+        <p>Gravo, fotografo e dirijo o conteúdo com qualidade técnica e estética refinada.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Entrega</h3>
+        <p>Arquivo editado, pronto para veicular — em ads, feed, stories ou reels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<section id="marcas">
+  <div class="marcas-inner">
+    <p class="section-label">Parcerias</p>
+    <h2 class="section-title">Marcas que confiam<br><em>no meu trabalho</em></h2>
+    <div class="divider"></div>
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <span class="marca-item"><img src="https://i.postimg.cc/DmYtfj86/10.jpg" alt="SOS Glow"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/7bCK9xZz/dove-logo.png" alt="Dove"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/q6CQvG5Y/gar.png" alt="Garnier"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/WqJS17HY/logo.png" alt="Irani"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/n9QTh1Wt/logo-9152632059737717502-1779387593-c7fd642e9bbb9c04a74ac92e7cf150641779387593.png" alt="Genesy"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/bS2LwR5P/Logo-com-joka-branco-300x251.png" alt="Parque Jo'ka"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/LgZv8VWp/LOGO-ROSA.png" alt="Ruby Rose"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/4Hhwx1Sq/loreal-png-l-oreal-paris-google-hangout-3000.png" alt="L'Oréal"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/9wq1QBkV/unicesumar-logo.png" alt="UniCesumar"/></span>
+        <!-- duplicado para loop contínuo -->
+        <span class="marca-item"><img src="https://i.postimg.cc/DmYtfj86/10.jpg" alt="SOS Glow"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/7bCK9xZz/dove-logo.png" alt="Dove"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/q6CQvG5Y/gar.png" alt="Garnier"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/WqJS17HY/logo.png" alt="Irani"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/n9QTh1Wt/logo-9152632059737717502-1779387593-c7fd642e9bbb9c04a74ac92e7cf150641779387593.png" alt="Genesy"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/bS2LwR5P/Logo-com-joka-branco-300x251.png" alt="Parque Jo'ka"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/LgZv8VWp/LOGO-ROSA.png" alt="Ruby Rose"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/4Hhwx1Sq/loreal-png-l-oreal-paris-google-hangout-3000.png" alt="L'Oréal"/></span>
+        <span class="marca-item"><img src="https://i.postimg.cc/9wq1QBkV/unicesumar-logo.png" alt="UniCesumar"/></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <p class="section-label" style="text-align:center;">Dúvidas frequentes</p>
+    <h2 class="section-title" style="text-align:center;">FAQ</h2>
+    <div class="divider"></div>
+
+    <div class="faq-item">
+      <div class="faq-q">O que é UGC? <span class="faq-icon">+</span></div>
+      <div class="faq-a">UGC (User Generated Content) é conteúdo criado por criadores independentes com linguagem autêntica — sem parecer publicidade tradicional. É o formato que mais converte em ads e redes sociais hoje.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Como funciona o processo de contratação? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Você envia o briefing, alinhamos proposta e prazo, assinamos um contrato simples e dou início à produção. A entrega é feita em até 7 dias úteis após aprovação do roteiro.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Posso usar os vídeos em anúncios pagos? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Sim! Os conteúdos são produzidos para uso em ads no Meta, TikTok, Google e outras plataformas. Os direitos de uso são definidos no contrato.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Você atende marcas de qualquer segmento? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Atendo a maioria dos segmentos — beleza, saúde, moda, lifestyle, alimentação, turismo, aviação e outros. Caso o nicho exija análise, conversamos antes de fechar.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Qual o prazo de entrega? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Em média 5 a 7 dias úteis após aprovação do roteiro. Para demandas urgentes, consulte disponibilidade.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <p class="section-label">Vamos criar juntos</p>
+  <h2 class="section-title">Pronta para elevar<br><em>a sua marca?</em></h2>
+  <p>Entre em contato e vamos conversar sobre o seu projeto.</p>
+  <a href="https://wa.me/5545999087188?text=Olá%20Jackye!%20Tenho%20interesse%20em%20criar%20conteúdo%20para%20minha%20marca." class="btn-contato" target="_blank">Falar pelo WhatsApp</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Jackye Silva · UGC Creator · Todos os direitos reservados</p>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a class="wa-btn" href="https://wa.me/5545999087188?text=Olá%20Jackye!%20Tenho%20interesse%20em%20criar%20conteúdo%20para%20minha%20marca." target="_blank" title="Falar pelo WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
+  });
+});
+
+// Load hero image from uploaded file
+// A foto enviada precisa ser referenciada — placeholder até você hospedar
+document.getElementById('heroImg').src='https://i.postimg.cc/6Tz7zs8V/foto.jpg';
+</script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+</body>
+</html>
